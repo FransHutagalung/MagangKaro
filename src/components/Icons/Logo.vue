@@ -1,30 +1,52 @@
 <template>
   <div
-  style="background-color: #ffe3b3; height: 120px; width: 120px; "
-  class=" relative flex flex-col items-center pt-4  ">
-    <img
-    src="/logofix.png" alt="">
+    ref="logoRef"
+    class="logo z-4 flex flex-col items-center pt-4"
+    :style="{ backgroundColor: '#ffe3b3', height: '110px', width: '120px', position: 'fixed', zIndex: 20, left: isScrolled ? '4%' : '45%' }"
+  >
+    <img :css="false"  src="/logofix.png" alt="" />
     <div class="triangle"></div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const logoRef = ref(null);
+const isScrolled = ref(false);
+
+
+function handleScroll() {
+  isScrolled.value = window.scrollY > 50;
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+  handleScroll(); // Set posisi awal
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <style scoped>
-img{
-  width:  80px;
+.logo {
+  transition: left 0.5s ease;
+}
+
+img {
+  width: 80px;
   z-index: 10;
 }
 
 .triangle {
-    position: absolute;
-    width: 0;
-    top: 100px;
-    z-index: 8;
-    border-top:60px solid #ffe3b3;
-    border-left:60px solid transparent;
-    border-right:60px solid transparent;
+  position: absolute;
+  width: 0;
+  top: 110px;
+  z-index: 4;
+  border-top: 50px solid #ffe3b3;
+  border-left: 60px solid transparent;
+  border-right: 60px solid transparent;
 }
-
 </style>
