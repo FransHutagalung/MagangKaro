@@ -2,17 +2,17 @@
   <div
     style="background-color: #26648e; top: 100px; left: 0px"
     ref="listRef"
-    class="absolute z-5 w-full h-10 flex justify-between"
+    class="absolute z-5 w-full h-10 flex "
   >
     <div ref="liRef" class="w-1/2 flex justify-center items-center">
-      <ul class="flex flex-row gap-20 text-white">
+      <ul class="flex   flex-row gap-10 text-white">
         <li>Home</li>
         <li>About</li>
         <li>Contact</li>
       </ul>
     </div>
     <div ref="liRef" class="w-1/2 px-3 flex justify-center items-center">
-      <ul class="flex flex-row gap-20 text-white">
+      <ul class="flex  flex-row gap-10 text-white">
         <li>Forum</li>
         <li>Join</li>
         <li>Contact</li>
@@ -28,15 +28,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const listRef = ref(null)
 const liRef = ref(null)
 
-async function onEnter(el, onComplete) {
-  await animate(el, { opacity: 1 })
-  onComplete()
-}
-
 function handleScroll() {
-  if (listRef.value) {
+  if (listRef.value && liRef.value) {
     const scrollY = window.scrollY
-
     if (scrollY > 50) {
       listRef.value.style.top = '20px'
       listRef.value.style.left = '50%'
